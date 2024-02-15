@@ -1,0 +1,13 @@
+SQL CREATE database:
+    The CREATE DATABASE statement is used to create a new SQL database
+syntax:
+CREATE DATABASE databasename;
+SQL DROP database:
+    The DROP DATABASE statement is used to drop an existing SQL database
+syntax:
+DROP databasename;
+Note: Be careful before dropping a database. Deleting a database will result in 
+loss of complete information stored in the database!
+
+
+
