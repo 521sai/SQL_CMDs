@@ -98,9 +98,9 @@ IS null syntax:
 SQL update statement:
  The UPDATE statement is used to modify the existing records in a table.
 update syntax:
-UPDATE table_name
-SET column1 = value1, column2 = value2, ...
-WHERE condition;
+    UPDATE table_name
+    SET column1 = value1, column2 = value2, ...
+    WHERE condition;
 
 update multiple records;
 SQL DELETE statement:
@@ -111,6 +111,7 @@ delete all RECORDS(rows):
 It is possible to delete all rows in a table without deleting the table. 
  This means that the table structure, attributes, and indexes
     syntax:DELETE FROM table_name;
+ 
  To delete permently table:
  DROP TABLE table_name;
 
@@ -120,7 +121,7 @@ It is possible to delete all rows in a table without deleting the table.
  MySQL supports the LIMIT clause to select a limited number of records, 
  while Oracle uses FETCH FIRST n ROWS ONLY and ROWNUM.
 
- MySQL syntax:
+MySQL syntax:
     SELECT column_name(s)
     FROM table_name
     WHERE condition
@@ -137,6 +138,15 @@ syntax:
     WHERE condition;
 AS keyword:
  set a alias name 
+syntax:
+    SELECT column_name AS alias_name
+    FROM table_name;
+Some database systems allows both [] and "", and some only allows one of them.
+Aliases can be useful when:
+There are more than one table involved in a query
+Functions are used in the query
+Column names are big or not very readable
+Two or more columns are combined together
 
 SQl COUNT:The COUNT() function returns the number of rows that matches a specified criterion.
  NULL values will not be counted.
@@ -147,6 +157,180 @@ syntax:
 SQl SUM:
 The SUM() function returns the total sum of a numeric column.
 syntax:
- SELECT SUM(column_name)
-FROM table_name
-WHERE condition;
+    SELECT SUM(column_name)
+    FROM table_name
+    WHERE condition;
+SQl AVG function:
+The AVG() function returns the average value of a numeric column.
+Note: NULL values are ignored.
+syntax:
+    SELECT AVG(column_name)
+    FROM table_name
+    WHERE condition;
+SQL LIKE operator:
+The LIKE operator is used in a WHERE clause to search for a specified pattern in a column.
+ The percent sign % represents zero, one, or multiple characters
+ The underscore sign _ represents one, single character
+syntax:
+    SELECT column1, column2, ...
+    FROM table_name
+    WHERE columnN LIKE pattern;
+To return records that starts with a specific letter or phrase, 
+add the % at the end of the letter or phrase.
+To return records that ends with a specific letter or phrase, 
+add the % at the beginning of the letter or phrase.
+
+SQL WildCard characters:
+
+Wildcard characters are used with the LIKE operator. 
+The LIKE operator is used in a WHERE clause to search for a specified pattern in a column.
+[] ->	Represents any single character within the brackets
+^ -> Represents any character not in the brackets
+- -> Represents any single character within the specified range
+{} ->Represents any escaped character
+
+SQL IN operator:
+ The IN operator allows you to specify multiple values in a WHERE clause
+syntax:
+    SELECT column_name(s)
+    FROM table_name
+    WHERE column_name IN (value1, value2, ...);
+SQL between operator:
+The BETWEEN operator selects values within a given range. The values can be numbers, text, or dates.
+syntax:
+    SELECT column_name(s)
+    FROM table_name
+    WHERE column_name BETWEEN value1 AND value2;
+BETWEEN dates:
+EX:-
+SELECT * FROM Orders
+                          mm/dd/yyyy      mm/dd/yyyy
+WHERE OrderDate BETWEEN #07/01/1996# AND #07/31/1996#;
+
+SQL Joins:
+(INNER) JOIN: Returns records that have matching values in both tables
+LEFT (OUTER) JOIN: Returns all records from the left table, and the matched records from the right table
+RIGHT (OUTER) JOIN: Returns all records from the right table, and the matched records from the left table
+FULL (OUTER) JOIN: Returns all records when there is a match in either left or right table
+
+INNER JOIN:syntax
+    SELECT column_name(s)
+    FROM table1
+    INNER JOIN table2
+    ON table1.column_name = table2.column_name;
+[JOIN and INNER JOIN will return the same result.]
+
+LEFT JOIN:The LEFT JOIN keyword returns all records from the left table (table1), and the matching records from the right table (table2).
+The result is 0 records from the right side, if there is no match.
+syntax
+    SELECT column_name(s)
+    FROM table1
+    LEFT JOIN table2
+    ON table1.column_name = table2.column_name;
+[In some databases LEFT JOIN is called LEFT OUTER JOIN.]
+SQL RIGHT JOIN:The RIGHT JOIN keyword returns all records from the right table (table2), 
+and the matching records from the left table (table1).
+The result is 0 records from the left side, if there is no match.
+syntax:
+    SELECT column_name(s)
+    FROM table1
+    RIGHT JOIN table2
+    ON table1.column_name = table2.column_name;
+FULL JOIN:The FULL OUTER JOIN keyword returns all records when there is a match in 
+left (table1) or right (table2) table records.
+syntax:
+    SELECT column_name(s)
+    FROM table1
+    FULL OUTER JOIN table2
+    ON table1.column_name = table2.column_name
+    WHERE condition;
+UNION operator:
+The UNION operator is used to combine the result-set of two or more SELECT statements.
+UNION syntax:
+    SELECT column_name(s) FROM table1
+    UNION
+    SELECT column_name(s) FROM table2;
+UNION ALL: The UNION operator selects only distinct values by default. To allow duplicate values, use UNION ALL
+SQL GROUP BY:
+The GROUP BY statement groups rows that have the same values into summary rows, 
+like "find the number of customers in each country".
+syntax:
+    SELECT column_name(s)
+    FROM table_name
+    WHERE condition
+    GROUP BY column_name(s)
+    ORDER BY column_name(s);
+SQL HAVING clause:
+The HAVING clause was added to SQL because the WHERE keyword cannot be used with aggregate functions.
+syntax:
+    SELECT column_name(s)
+    FROM table_name
+    WHERE condition
+    GROUP BY column_name(s)
+    HAVING condition
+    ORDER BY column_name(s);
+
+SQL EXISTS:
+The EXISTS operator is used to test for the existence of any record in a subquery.
+The EXISTS operator returns TRUE if the subquery returns one or more records.
+syntax:
+    SELECT column_name(s)
+    FROM table_name
+    WHERE EXISTS
+    (SELECT column_name FROM table_name WHERE condition);
+SQL any and all:
+The ANY and ALL operators allow you to perform a comparison between a single column 
+value and a range of other values.
+syntax:
+    SELECT column_name(s)
+    FROM table_name
+    WHERE column_name operator ANY
+    (SELECT column_name
+    FROM table_name
+    WHERE condition);
+SQL SELECT INTO:
+The SELECT INTO statement copies data from one table into a new table.
+syntax:
+    SELECT *
+    INTO newtable [IN externaldb]
+    FROM oldtable
+    WHERE condition;
+SQL INSERT INTO SELECT:
+The INSERT INTO SELECT statement copies data from one table and inserts it into another table.
+The INSERT INTO SELECT statement requires that the data types in source and target tables match.
+syntax:
+    INSERT INTO table2
+    SELECT * FROM table1
+    WHERE condition;
+SQL CASE EXpression:
+The CASE expression goes through conditions and returns a value when the first condition is met 
+(like an if-then-else statement). So, once a condition is true, it will stop reading and return 
+the result. If no conditions are true, it returns the value in the ELSE clause
+syntax:
+    CASE
+        WHEN condition1 THEN result1
+        WHEN condition2 THEN result2
+        WHEN conditionN THEN resultN
+        ELSE result
+    END;
+SQL NULL functions:
+The MySQL IFNULL() function lets you return an alternative value if an expression is NULL
+The Oracle NVL() function achieves the same result
+STORED Procedure for SQL Server:
+A stored procedure is a prepared SQL code that you can save, 
+so the code can be reused over and over again.
+syntax:
+    CREATE PROCEDURE procedure_name
+    AS
+    sql_statement
+    GO;
+Execute a stored Procedure: 
+EXEC procedure_name;
+
+SQL Comments: Comments are used to explain sections of SQL statements
+Single line comments start with --
+Multi-line comments start with /* and end with */
+
+
+
+
