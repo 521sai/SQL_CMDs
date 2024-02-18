@@ -9,5 +9,85 @@ DROP databasename;
 Note: Be careful before dropping a database. Deleting a database will result in 
 loss of complete information stored in the database!
 
+List the data bases by use This
+SHOW databases;
+
+SQL BACKUP database:
+The BACKUP DATABASE statement is used in SQL Server to create a full back up of an 
+existing SQL database.
+
+syntax:
+    BACKUP DATABASE databasename
+    TO DISK = 'filepath';
+SQL CREATE table:
+The CREATE TABLE statement is used to create a new table in a database.
+syntax:
+    CREATE TABLE table_name (
+        column1 datatype,
+        column2 datatype,
+        column3 datatype,
+    ....
+    );
+SQL DROP table:
+The DROP TABLE statement is used to drop an existing table in a database.
+syntax:
+    DROP TABLE table_name;
+SQL TRUNCATE table:
+The TRUNCATE TABLE statement is used to delete the data inside a table, but not the table itself.
+syntax:
+    TRUNCATE TABLE table_name;
+SQL ALTER table:
+The ALTER TABLE statement is used to add, delete, or modify columns in an existing table.
+The ALTER TABLE statement is also used to add and drop various constraints on an existing table.
+syntax: add a column
+    ALTER TABLE table_name
+    ADD column_name datatype;
+SQL create constraints:
+Constraints can be specified when the table is created with the CREATE TABLE statement, or 
+after the table is created with the ALTER TABLE statement.
+syntax:
+    CREATE TABLE table_name (
+        column1 datatype constraint,
+        column2 datatype constraint,
+        column3 datatype constraint,
+        ....
+    )
+NOT NULL - Ensures that a column cannot have a NULL value
+UNIQUE - Ensures that all values in a column are different
+PRIMARY KEY - A combination of a NOT NULL and UNIQUE. Uniquely identifies each row in a table
+FOREIGN KEY - Prevents actions that would destroy links between tables
+CHECK - Ensures that the values in a column satisfies a specific condition
+DEFAULT - Sets a default value for a column if no value is specified
+CREATE INDEX - Used to create and retrieve data from the database very quickly
+
+SQL NOT NULL:
+The NOT NULL constraint enforces a column to NOT accept NULL values.
+ex:
+    CREATE TABLE Persons (
+        ID int NOT NULL,
+        LastName varchar(255) NOT NULL,
+        FirstName varchar(255) NOT NULL,
+        Age int
+    ); 
+MySQL:
+ALTER table table_name modify column_name data type NOT NULL;
+
+SQL UNIQUE:
+The UNIQUE constraint ensures that all values in a column are different.
+SQL UNIQUE on ALTER table:
+    ALTER TABLE Persons
+    ADD UNIQUE (ID);
+SQL Primary key:
+The PRIMARY KEY constraint uniquely identifies each record in a table.
+Primary keys must contain UNIQUE values, and cannot contain NULL values.
+SQL Primary key on alter table:
+MySQL:
+    ALTER TABLE Persons
+    ADD PRIMARY KEY (ID);
+SQL FOREIGN KEY:
+The FOREIGN KEY constraint is used to prevent actions that would destroy links between tables
+
+
+
 
 
